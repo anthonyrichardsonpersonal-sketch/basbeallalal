@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ProBase | Sabermetric API</title>
+</head>
+<body class="bg-black text-white font-sans">
+    <nav class="p-6 border-b border-zinc-800 flex justify-between">
+        <h1 class="text-xl font-black tracking-tighter text-blue-500">PROBASE <span class="text-white">v1.0</span></h1>
+        <div class="text-xs bg-zinc-900 px-3 py-1 rounded-full text-zinc-400">API Status: <span class="text-green-500">LIVE</span></div>
+    </nav>
+    <main class="max-w-4xl mx-auto mt-20 text-center">
+        <h2 class="text-6xl font-bold mb-4 tracking-tight">Advanced Matchup <span class="text-blue-600">Predictions</span></h2>
+        <p class="text-zinc-500 mb-10">Real-time sabermetrics tracking for personnel evaluation.</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-zinc-900 p-10 rounded-3xl border border-zinc-800">
+                <p class="text-zinc-500 text-sm uppercase font-bold mb-2">Win Probability</p>
+                <h3 id="prob" class="text-7xl font-black">--%</h3>
+            </div>
+            <div class="bg-zinc-900 p-10 rounded-3xl border border-zinc-800 text-left">
+                <p class="text-zinc-500 text-sm font-bold mb-4 uppercase">System Logs</p>
+                <div class="font-mono text-xs text-blue-400 space-y-2">
+                    <p>> Initializing PostgreSQL Connection...</p>
+                    <p>> Pulling MLB Statcast Data...</p>
+                    <p>> Launch Tracker Active.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        fetch('/api/predict').then(r => r.json()).then(data => {
+            document.getElementById('prob').innerText = data.probability;
+        });
+    </script>
+</body>
+</html>
